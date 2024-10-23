@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  postgresql:
+    image: postgres:14
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_DB: school
+      POSTGRES_USER: djamware
+      POSTGRES_PASSWORD: dj@mw@r3
+    ports:
+      - "5433:5432"
+    networks:
+      - school-network
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  school-network:
+    name: school-network
+    external: true
